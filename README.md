@@ -66,6 +66,7 @@ Dark Mode UI
 bash
 Copy
 Edit
+```
 airbnb_proj/
 ├── blogapp/
 │   ├── authy/                  # Authentication app
@@ -78,6 +79,7 @@ airbnb_proj/
 ├── db.sqlite3                  # Default database
 ├── manage.py                   # Django management CLI
 └── .venv/                      # Virtual environment
+```
 ⚙️ Getting Started
 1. Clone the Repository
 bash
