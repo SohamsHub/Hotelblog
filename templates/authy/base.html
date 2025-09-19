@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6eaec;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #a4a8af;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dark-mode nav {
+            background-color: #1e1e1e;
+            box-shadow: none;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .logo h2 {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #666;
+        }
+
+        .dark-mode .logo h2 {
+            color: #aaa;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 44px 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 14px;
+            height: 40px;
+            box-sizing: border-box;
+        }
+
+        .search-bar button {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar button svg {
+            height: 20px;
+            width: 20px;
+            stroke: black;
+        }
+
+        .dark-mode .search-bar input {
+            background-color: #222;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .search-bar button svg {
+            stroke: white;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: 1px solid #888;
+            border-radius: 25px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode #darkModeToggle {
+            border: 1px solid #aaa;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .search-form {
+                width: 100%;
+            }
+        }
+
+
+        .profile-hover-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .profile-hover-box img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-hover-box span {
+            opacity: 0;
+            white-space: nowrap;
+            max-width: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-width 0.3s ease;
+            font-weight: bold;
+            color: inherit;
+        }
+
+        .profile-hover-box:hover span {
+            opacity: 1;
+            max-width: 200px;
+            margin-left: 6px;
+        }
+
+        .logout-button {
+            margin-left: 10px;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dark-mode .logout-button {
+            border-color: #999;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="{% url 'post:home' %}">
+                <h1>EROOMS</h1>
+
+                <h2>Right place, Right choice</h2>
+            </a>
+        </div>
+
+        <div class="search-bar">
+            <form method="GET" action="{% url 'post:home' %}" class="search-form">
+                <input type="text" name="q" placeholder="Search by title or address" value="{{ request.GET.q }}">
+                <button type="submit" aria-label="Search">
+                    <!-- Inline black SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin-left: auto;">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'authy:logout' %}" class="logout-button">Logout</a>
+            {% else %}
+            <a href="{% url 'authy:login' %}" class="logout-button">Login</a>
+            <a href="{% url 'authy:register' %}" class="logout-button">Register</a>
+            {% endif %}
+        </div>
+
+
+
+        <button id="darkModeToggle" onclick="toggleDarkMode()">Dark Mode</button>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script>
+        const toggleButton = document.getElementById("darkModeToggle");
+
+        function updateButtonLabel() {
+            const isDark = document.body.classList.contains("dark-mode");
+            toggleButton.textContent = isDark ? "Light Mode" : "Dark Mode";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+            updateButtonLabel();
+        }
+
+        // On load
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+        updateButtonLabel();
+    </script>
+</body>
+
+</html>

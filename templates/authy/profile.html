@@ -1,0 +1,140 @@
+{% extends "authy/base.html" %}
+
+{% block content %}
+<style>
+    .profile-wrapper {
+        max-width: 900px;
+        margin: 40px auto;
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        font-family: Arial, sans-serif;
+    }
+
+    .left-card, .right-card {
+        flex: 1;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark-mode .left-card,
+    .dark-mode .right-card {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+    }
+
+    .profile-header {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-header img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .superhost-tag {
+        background: #ff385c;
+        color: white;
+        display: inline-block;
+        padding: 5px 12px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-top: 8px;
+    }
+
+    .stats {
+        margin-top: 15px;
+        font-size: 0.95rem;
+    }
+
+    .stats i {
+        margin-right: 8px;
+    }
+
+    .host-info-section {
+        margin-top: 20px;
+    }
+
+    .host-info-section h3 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    .host-info-section p {
+        font-size: 0.9rem;
+        margin: 6px 0;
+    }
+
+    .icon-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .icon-line i {
+        color: #333;
+    }
+
+    .dark-mode .icon-line i {
+        color: #fff;
+    }
+</style>
+
+<div class="profile-wrapper">
+    <div class="left-card">
+        <div class="profile-header">
+            <img src="{{ profile.profile_image.url }}" alt="Profile Image">
+            <div>
+                <h2>{{ profile.user.username }}</h2>
+                <div class="superhost-tag">🌟 Superhost</div>
+            </div>
+        </div>
+        {% if authenticated %}
+                    <a href="{% url 'authy:edit_profile' %}">edit profile</a>
+                {% endif %}
+        <p><strong>Bio:</strong> {{ profile.bio|default:"No bio provided." }}</p>
+
+        <div class="stats">
+            <p><i class="fa fa-star"></i> {{ profile.review_count|default:0 }} reviews</p>
+            <p><i class="fa fa-thumbs-up"></i> Average rating: {{ profile.average_rating|default:"N/A" }}/5</p>
+        </div>
+    </div>
+
+    <div class="right-card">
+        <div class="host-info-section">
+            <h3>{{ profile.user.username }} is a Superhost</h3>
+            <p>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
+        </div>
+
+        <div class="host-info-section">
+            <h3>Host details</h3>
+            <p class="icon-line"><i class="fa fa-check-circle"></i> Response rate: 100%</p>
+            <p class="icon-line"><i class="fa fa-clock"></i> Responds within an hour</p>
+            <p class="icon-line"><i class="fa fa-comment"></i> Try to maintain hygiene</p>
+            <p class="icon-line"><i class="fa fa-graduation-cap"></i> Went to: clg_name</p>
+            <p class="icon-line"><i class="fa fa-id-card"></i> Identity verified</p>
+        </div>
+
+        <div class="host-info-section">
+            <h3>About {{ profile.user.username }}</h3>
+            <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone_no }}</p>
+            <p><strong>Address:</strong> {{ profile.address }}</p>
+            <p><strong>Work:</strong> Home maker</p>
+            <p>I love to cook and do shopping… spending time with children keeps me jolly and happy. Hanging out with my girls… I like long drives with my partner. ❤️</p>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
