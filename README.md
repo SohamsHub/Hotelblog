@@ -1,65 +1,141 @@
-# 📘 EROOMS - Your Room, Your Choice
+# Erooms
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+A Django 5 project for browsing and managing room/apartment listings with photos, reviews, user authentication, and user profiles. The UI includes a simple dark mode toggle and pagination. Tailwind CSS is available via the django-tailwind integration (optional during development).
 
-*EROOOMS* is a fully functional Django-based web application for listing and browsing rental rooms with key details like address, host info, and user reviews. The platform features dark mode, profile picture support, search functionality, and smooth navigation for an enhanced user experience.
+## Key features
 
----
+- Listings: title, description, price/night, address, location, amenities, photos
+- Listing details page: photo gallery, basic info, reviews
+- Search: by title or address (case-insensitive)
+- Reviews (1–5 rating), reservations model scaffold
+- Authentication: register, login, logout
+- Profiles: view and edit profile, upload profile image
+- Pagination on the home page
+- Dark mode toggle
+- Media file serving in development (/media/)
 
-## 📌 Table of Contents
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Screenshots & Demo](#-screenshots--demo)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Available URLs](#-available-urls)
-- [Models Overview](#-models-overview)
-- [Git Workflow](#-git-workflow)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
+## Tech stack
 
----
+- Python 3.11+ (recommended)
+- Django 5.x
+- django-extensions
+- django-browser-reload (optional, improves dev UX)
+- SQLite (development default)
 
-## 🚀 Features
-- 🔒 *User Authentication*: Register, Login, Logout  
-- 👤 *Profile Management*: Edit profile with image upload  
-- 🏡 *Room Listings*: Browse all available rooms  
-- 🔍 *Search Bar*: Search listings by title or address  
-- 🌓 *Dark Mode Toggle*: Smooth UI toggle with local storage  
-- 🗺️ *Listing Page*: Address, photos, and review details  
-- ⭐ *Rating System*: User reviews with star ratings  
-- 📱 *Responsive Design*: Mobile and desktop friendly  
-- 🧭 *Pagination*: Improved experience for large datasets  
+The main apps live in:
+- post/ — listings, photos, reservations, reviews, home and detail views
+- authy/ — user profiles, auth views (login/register/logout, edit profile)
+- theme/ — Tailwind integration and static build tooling
 
----
+## Project structure (abridged)
 
-## 🧰 Tech Stack
+- blog_app_1/settings.py — settings (MEDIA and Tailwind configured)
+- blog_app_1/urls.py — routes include post and authy, media served in dev
+- post/models.py — Amenity, Listing, ListingPhoto (UUID), Reservation, Review
+- post/views.py — home (search + pagination), listing detail
+- authy/models.py — Profile (OneToOne with User), image upload path
+- authy/views.py — login, register, logout, profile view/edit
+- templates/ — HTML templates for post/authy pages
+- media/ — user/media uploads (sample data included)
+- theme/static_src/ — Tailwind CLI build config (package.json, postcss, tailwind.config)
 
-| Layer       | Technology |
-|------------|------------|
-| Language    | Python 3.12+ |
-| Framework   | Django 4.x |
-| Database    | SQLite3 (default) |
-| Frontend    | HTML5, CSS3 |
-| Templating  | Django Templates |
-| Static Files| Custom CSS & SVG |
----
+## Prerequisites
+
+- Python 3.11+ (3.12 works fine)
+- pip
+- Node.js 18+ (only if you want Tailwind live build)
+
+## Quick start (development)
+
+1) Create and activate a virtual environment
+
+bash
+python -m venv .venv
+source .venv/bin/activate
 
 
-## 🏗️ Project Structure
-```bash
-erooms/
-├── blogapp/
-│   ├── authy/                  # Authentication app
-│   ├── post/                   # Main app for listings
-│   ├── media/                  # Uploaded images
-│   ├── templates/
-│   │   ├── authy/              # login.html, register.html, profile.html
-│   │   └── post/               # home.html, listing_room.html
-│   └── blog_app_1/             # Main settings & urls
-├── db.sqlite3                  # Default database
-├── manage.py                   # Django management CLI
-├── requirements.txt            # Python dependencies
+2) Install Python dependencies
+
+bash
+pip install -r requirements.txt
+
+
+3) Apply database migrations
+
+bash
+python manage.py migrate
+
+
+4) (Optional) Create a superuser to access Django admin
+
+bash
+python manage.py createsuperuser
+
+
+5) Run the development server
+
+bash
+python manage.py runserver
+
+
+The app will be available at http://127.0.0.1:8000/
+
+- Home: / (listings with pagination, search by title/address)
+- Listing details: /rooms/<id>
+- Auth: /login, /register, /logout
+- Profiles: /profiles/<id>, /edit-profile/
+- Admin: /admin/ (if you created a superuser)
+
+Media files are served from /media/ in development.
+
+Note: The main templates under templates/post/ mostly use custom CSS. Tailwind is available if you choose to build styles or extend the theme/templates/base.html.
+
+## Database and media
+
+- Default DB: SQLite (db.sqlite3). Suitable for local development.
+- Media uploads are stored under media/ with structured paths for listings and profiles.
+- In production, configure a proper database and media/static hosting. Do not use the committed SECRET_KEY in production.
+
+## Running tests
+
+bash
+python manage.py test
+
+
+## Git: clone and fork workflows
+
+You can either clone the original repository or fork it and work on your copy.
+
+### Clone (read-only contribution path)
+
+HTTPS:
+
+bash
+git clone https://github.com/SohamsHub/Hotelblog.git
+cd Hotelblog
+
+
+SSH:
+
+bash
+git clone git@github.com:SohamsHub/Hotelblog.git
+cd Hotelblog
+
+
+### Fork (recommended for contributing)
+
+1) On GitHub, click “Fork” on https://github.com/SohamsHub/Hotelblog to create your fork under your account.
+2) Clone your fork locally.
+
+HTTPS:
+
+bash
+git clone https://github.com/<your-username>/Hotelblog.git
+cd Hotelblog
+
+
+SSH:
+
+bash
+git clone git@github.com:<your-username>/Hotelblog.git
+cd Hotelblog
