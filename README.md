@@ -49,7 +49,7 @@ The main apps live in:
 
 1) Create and activate a virtual environment
 
-bash
+```bash
 python -m venv .venv
 source .venv/bin/activate
 
@@ -139,3 +139,4 @@ SSH:
 bash
 git clone git@github.com:<your-username>/Hotelblog.git
 cd Hotelblog
+```
