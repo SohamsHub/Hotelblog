@@ -1,6 +1,9 @@
-# Erooms
+### Erooms
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A Django 5 project for browsing and managing room/apartment listings with photos, reviews, user authentication, and user profiles. The UI includes a simple dark mode toggle and pagination. Tailwind CSS is available via the django-tailwind integration (optional during development).
+EROOMS is a fully functional Django-based web application for listing and browsing rental rooms with key details like address, host info, and user reviews. The platform features dark mode, profile picture support, search functionality, and smooth navigation for a better user experience.
 
 ## Key features
 
@@ -47,37 +50,37 @@ The main apps live in:
 
 ## Quick start (development)
 
-1) Create and activate a virtual environment
+## 1) Create and activate a virtual environment
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-2) Install Python dependencies
+## 2) Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
 
-3) Apply database migrations
+## 3) Apply database migrations
 
 ```bash
 python manage.py migrate
 ```
 
-4) (Optional) Create a superuser to access Django admin
+## 4) (Optional) Create a superuser to access Django admin
 
 ```bash
 python manage.py createsuperuser
 ```
 
-5) Run the development server
+## 5) Run the development server
 
-bash
+```bash
 python manage.py runserver
-
+```
 
 The app will be available at http://127.0.0.1:8000/
 
@@ -131,7 +134,7 @@ cd Hotelblog
 HTTPS:
 
 ```bash
-git clone https://github.com/<your-username>/Hotelblog.git
+git clone https://github.com/SohamsHub/Hotelblog.git
 cd Hotelblog
 ```
 
