@@ -52,25 +52,26 @@ The main apps live in:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-
+```
 
 2) Install Python dependencies
 
-bash
+```bash
 pip install -r requirements.txt
+```
 
 
 3) Apply database migrations
 
-bash
+```bash
 python manage.py migrate
-
+```
 
 4) (Optional) Create a superuser to access Django admin
 
-bash
+```bash
 python manage.py createsuperuser
-
+```
 
 5) Run the development server
 
@@ -98,9 +99,9 @@ Note: The main templates under templates/post/ mostly use custom CSS. Tailwind i
 
 ## Running tests
 
-bash
+```bash
 python manage.py test
-
+```
 
 ## Git: clone and fork workflows
 
@@ -110,17 +111,17 @@ You can either clone the original repository or fork it and work on your copy.
 
 HTTPS:
 
-bash
+```bash
 git clone https://github.com/SohamsHub/Hotelblog.git
 cd Hotelblog
-
+```
 
 SSH:
 
-bash
+```bash
 git clone git@github.com:SohamsHub/Hotelblog.git
 cd Hotelblog
-
+```
 
 ### Fork (recommended for contributing)
 
@@ -129,14 +130,14 @@ cd Hotelblog
 
 HTTPS:
 
-bash
+```bash
 git clone https://github.com/<your-username>/Hotelblog.git
 cd Hotelblog
-
+```
 
 SSH:
 
-bash
+```bash
 git clone git@github.com:<your-username>/Hotelblog.git
 cd Hotelblog
 ```
