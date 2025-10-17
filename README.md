@@ -141,6 +141,6 @@ cd Hotelblog
 SSH:
 
 ```bash
-git clone git@github.com:<your-username>/Hotelblog.git
+git clone git@github.com:SohamsHub/Hotelblog.git
 cd Hotelblog
 ```
